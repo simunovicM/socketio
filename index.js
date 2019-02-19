@@ -1,11 +1,11 @@
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);;
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.emit('connection');
 });
 
-http.listen(8080, function(){
-  console.log('listening on *:8080');
+server.listen(8000, function(){
+  console.log('listening on *:8000');
 });
